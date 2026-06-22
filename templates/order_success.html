@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Placed | NOXEN</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<section class="success-page">
+  <h1>Order Placed Successfully</h1>
+  <p>Your NOXEN hoodie order has been received.</p>
+
+  <div class="success-box">
+    <h3>Customer: {{ order.customer_name }}</h3>
+    <h3>Email: {{ order.email }}</h3>
+    <h3>Phone: {{ order.phone }}</h3>
+    <h3>Product: {{ order.product_name }}</h3>
+    <h3>Size: {{ order.size }}</h3>
+    <h3>Price: {{ order.price }}</h3>
+    <h3>Payment: {{ order.payment }}</h3>
+  </div>
+
+  <a href="/catalog">Continue Shopping</a>
+</section>
+
+</body>
+</html>
