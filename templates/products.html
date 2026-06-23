@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% set title = "Hoodies | Noxen" %}
+{% block content %}
+<section class="shop-hero">
+    <p class="eyebrow">Explore the drop</p>
+    <h1>Choose your hoodie</h1>
+    <p>Preview the hoodie, check quality details, then add it to cart and complete checkout.</p>
+</section>
+
+<section class="section shop-section">
+    <div class="shop-grid">
+        {% for product in products %}
+        <article class="shop-card">
+            <span class="drop-chip">{{ product.tag }}</span>
+            <div class="shop-image-wrap">
+                <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}" class="shop-image">
+            </div>
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <div class="price-row">
+                <strong>₹{{ product.price }}</strong>
+                <span>{{ product.color }}</span>
+            </div>
+            <div class="card-actions">
+                <button class="btn secondary preview-btn"
+                    data-name="{{ product.name }}"
+                    data-price="₹{{ product.price }}"
+                    data-color="{{ product.color }}"
+                    data-quality="{{ product.quality }}"
+                    data-description="{{ product.description }}"
+                    data-image="{{ url_for('static', filename='images/' + product.image) }}">
+                    Preview
+                </button>
+                <form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="POST">
+                    <button class="btn primary" type="submit">Buy Now</button>
+                </form>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<div class="modal" id="previewModal" aria-hidden="true">
+    <div class="modal-card">
+        <button class="modal-close" id="modalClose">×</button>
+        <div class="preview-stage">
+            <img id="modalImage" class="preview-hoodie" src="" alt="Hoodie preview">
+        </div>
+        <div class="modal-copy">
+            <p class="eyebrow">360° preview</p>
+            <h2 id="modalName"></h2>
+            <p id="modalDescription"></p>
+            <div class="detail-list">
+                <p><span>Price</span><strong id="modalPrice"></strong></p>
+                <p><span>Color</span><strong id="modalColor"></strong></p>
+                <p><span>Quality</span><strong id="modalQuality"></strong></p>
+            </div>
+            <p class="preview-note">This demo creates a 360° feel using smooth rotation. Later we can replace it with real product photos/video.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
