@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% set title = "Cart | Noxen" %}
+{% block content %}
+<section class="shop-hero small-cart">
+    <p class="eyebrow">Your cart</p>
+    <h1>Confirm size and quantity</h1>
+    <p>Select your hoodie size before checkout.</p>
+</section>
+
+<section class="cart-page">
+    {% if cart %}
+    <form method="POST" class="cart-list">
+        {% for item in cart %}
+        <article class="cart-item">
+            <img src="{{ url_for('static', filename='images/' + item.image) }}" alt="{{ item.name }}">
+            <div>
+                <h3>{{ item.name }}</h3>
+                <p>₹{{ item.price }} each</p>
+                <a class="remove-link" href="{{ url_for('remove_from_cart', product_id=item.product_id) }}">Remove</a>
+            </div>
+            <label>Size
+                <select name="size_{{ item.product_id }}">
+                    {% for size in ['S','M','L','XL','XXL'] %}
+                    <option {% if item.size == size %}selected{% endif %}>{{ size }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <label>Qty
+                <input type="number" name="quantity_{{ item.product_id }}" min="1" max="10" value="{{ item.quantity }}">
+            </label>
+            <strong>₹{{ item.price * item.quantity }}</strong>
+        </article>
+        {% endfor %}
+
+        <div class="cart-summary">
+            <span>Total</span>
+            <strong>₹{{ total }}</strong>
+            <button class="btn primary" type="submit">Proceed to Checkout</button>
+        </div>
+    </form>
+    {% else %}
+    <div class="empty-cart">
+        <h2>Your cart is empty</h2>
+        <p>Start exploring Noxen hoodies and add one to cart.</p>
+        <a class="btn primary" href="{{ url_for('products') }}">Explore Hoodies</a>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

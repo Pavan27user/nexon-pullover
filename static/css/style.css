@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #000;
+    color: white;
+}
+
+/* Header */
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;   /* removed red */
+    z-index: 10;
+}
+
+/* Optional glass effect instead of full transparent */
+/*
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(6px);
+    z-index: 10;
+}
+*/
+
+.logo h1 {
+    font-size: 60px;
+    letter-spacing: 8px;
+    color: black;
+}
+
+.logo p {
+    font-size: 16px;
+    letter-spacing: 8px;
+    color: #d4a017;
+}
+
+/* If logo is on image and black is not visible, use white */
+/*
+.logo h1 {
+    color: white;
+}
+*/
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    color: #d4a017;
+}
+
+/* Hero section */
+.hero {
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+                url("../images/hoodie-bg.png.png") center center / cover no-repeat;
+    display: flex;
+    align-items: center;
+    padding: 0 80px;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 700px;
+    z-index: 2;
+}
+
+.hero-content h2 {
+    font-size: 110px;
+    font-weight: 800;
+    color: black;
+    margin-bottom: 20px;
+}
+
+.hero-content h3 {
+    font-size: 48px;
+    letter-spacing: 10px;
+    color: #d4a017;
+    margin-bottom: 25px;
+}
+
+.hero-content p {
+    font-size: 22px;
+    line-height: 1.6;
+    color: #f5f5f5;
+    margin-bottom: 35px;
+}
+
+.hero-content .btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border: 2px solid #d4a017;
+    color: #d4a017;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.hero-content .btn:hover {
+    background: #d4a017;
+    color: black;
+}

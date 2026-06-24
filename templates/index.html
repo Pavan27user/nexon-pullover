@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% set title = "Noxen | Premium Hoodies" %}
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <p class="eyebrow">Premium streetwear hoodies</p>
+        <h1>Never Settle.<br>Wear the mindset.</h1>
+        <p class="hero-text">
+            Noxen hoodies are built for rainy mornings, winter nights, gym travel,
+            and everyday street style. Clean design. Heavy comfort. Confident look.
+        </p>
+        <div class="hero-actions">
+            <a class="btn primary" href="{{ url_for('products') }}">Shop Hoodies</a>
+            <a class="btn secondary" href="{{ url_for('login') }}">Place Order</a>
+        </div>
+        <div class="stats">
+            <div><strong>4</strong><span>Launch styles</span></div>
+            <div><strong>₹1499+</strong><span>Starting price</span></div>
+            <div><strong>COD</strong><span>Ready flow</span></div>
+        </div>
+    </div>
+    <div class="hero-card">
+        <div class="hoodie-visual">🖤</div>
+        <p class="drop-label">New Drop</p>
+        <h2>Noxen Core Hoodie</h2>
+        <p>Minimal. Heavy. Built for comfort.</p>
+        <a href="{{ url_for('login', product='noxen-core-hoodie') }}">Order Core Hoodie →</a>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Why customers choose us</p>
+        <h2>Designed for comfort and confidence</h2>
+    </div>
+    <div class="features-grid">
+        <article>
+            <span>☁️</span>
+            <h3>Soft fleece feel</h3>
+            <p>Comfort-focused fabric feel for daily wear and cold weather.</p>
+        </article>
+        <article>
+            <span>🧵</span>
+            <h3>Clean premium fit</h3>
+            <p>Modern streetwear cuts that look sharp with jeans, joggers, or shorts.</p>
+        </article>
+        <article>
+            <span>🚚</span>
+            <h3>Easy ordering</h3>
+            <p>Customers select product, size, quantity, and submit delivery details.</p>
+        </article>
+    </div>
+</section>
+
+<section class="section dark-section">
+    <div class="section-heading">
+        <p class="eyebrow">Featured products</p>
+        <h2>Start with the best sellers</h2>
+    </div>
+    <div class="product-grid">
+        {% for product in products %}
+        <article class="product-card">
+            <div class="product-image">{{ product.emoji }}</div>
+            <p class="tag">{{ product.tag }}</p>
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <div class="product-bottom">
+                <strong>₹{{ product.price }}</strong>
+                <a href="{{ url_for('login', product=product.id) }}">Order</a>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="cta-band">
+    <h2>Ready to launch your hoodie brand?</h2>
+    <p>This starter app can later connect to payment gateway, WhatsApp order alerts, and admin dashboard.</p>
+    <a class="btn primary" href="{{ url_for('products') }}">View Products</a>
+</section>
+{% endblock %}

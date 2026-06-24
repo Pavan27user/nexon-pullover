@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ hoodie.name }} | NOXEN</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="brand">
+    <div>NOXEN</div>
+    <span>NEVER SETTLE</span>
+  </div>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/catalog">Hoodies</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+</header>
+
+<section class="product-page">
+
+  <div class="product-view">
+    <div class="product-image-box">
+      <img src="{{ url_for('static', filename='images/' + hoodie.image) }}" alt="{{ hoodie.name }}">
+    </div>
+    <p class="view-text">PREMIUM PRODUCT VIEW</p>
+  </div>
+
+  <div class="product-details">
+    <h4>NOXEN PREMIUM</h4>
+    <h1>{{ hoodie.name }}</h1>
+    <h2>{{ hoodie.price }}</h2>
+
+    <p>{{ hoodie.description }}</p>
+    <p><strong>Material:</strong> {{ hoodie.material }}</p>
+
+    <form action="/place-order" method="POST">
+      <input type="hidden" name="product_name" value="{{ hoodie.name }}">
+      <input type="hidden" name="price" value="{{ hoodie.price }}">
+
+      <label>Select Size</label>
+      <select name="size" required>
+        <option value="">Choose size</option>
+        {% for size in hoodie.sizes %}
+        <option value="{{ size }}">{{ size }}</option>
+        {% endfor %}
+      </select>
+
+      <h3 class="form-title">Customer Details</h3>
+
+      <label>Full Name</label>
+      <input type="text" name="customer_name" placeholder="Enter full name" required>
+
+      <label>Email ID</label>
+      <input type="email" name="email" placeholder="Enter email address" required>
+
+      <label>Contact Number</label>
+      <input type="tel" name="phone" placeholder="Enter mobile number" required>
+
+      <label>Delivery Address</label>
+      <textarea name="address" placeholder="Enter delivery address" required></textarea>
+
+      <h3 class="form-title">Payment</h3>
+
+      <label>Payment Method</label>
+      <select name="payment" required>
+        <option value="">Choose payment method</option>
+        <option value="UPI">UPI</option>
+        <option value="Credit Card">Credit Card</option>
+        <option value="Debit Card">Debit Card</option>
+        <option value="Cash on Delivery">Cash on Delivery</option>
+      </select>
+
+      <button type="submit">PLACE ORDER</button>
+    </form>
+  </div>
+
+</section>
+
+</body>
+</html>

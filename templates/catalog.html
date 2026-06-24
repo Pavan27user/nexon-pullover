@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NOXEN | Hoodie Catalog</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="brand">
+    <div>NOXEN</div>
+    <span>NEVER SETTLE</span>
+  </div>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/catalog">Hoodies</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+</header>
+
+<section class="catalog">
+  <h4>PREMIUM COLLECTION</h4>
+  <h1>NOXEN Hoodie Catalog</h1>
+  <p class="catalog-subtitle">Five premium hoodies built for bold people.</p>
+
+  <div class="catalog-grid">
+    {% for hoodie in hoodies %}
+    <div class="catalog-card">
+      <img src="{{ url_for('static', filename='images/' + hoodie.image) }}" alt="{{ hoodie.name }}">
+
+      <h3>{{ hoodie.name }}</h3>
+      <p>{{ hoodie.description }}</p>
+
+      <div class="info">
+        <p><strong>Sizes:</strong> {{ hoodie.sizes | join(', ') }}</p>
+        <p><strong>Material:</strong> {{ hoodie.material }}</p>
+      </div>
+
+      <h2>{{ hoodie.price }}</h2>
+
+      <a href="/product/{{ hoodie.id }}" class="cart-btn">ADD TO CART</a>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+</body>
+</html>
