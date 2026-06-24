@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% set title = "Order Details | Noxen" %}
+{% block content %}
+<section class="form-page">
+    <div class="form-copy">
+        <p class="eyebrow">Customer order details</p>
+        <h1>Enter delivery details</h1>
+        <p>
+            This page works like a simple login/order page. Customers provide their details,
+            select product, size, and quantity, then submit the order.
+        </p>
+        <div class="secure-card">
+            <span>🔒</span>
+            <div>
+                <strong>Order data saved locally</strong>
+                <p>For demo, orders are stored in SQLite database: orders.db</p>
+            </div>
+        </div>
+    </div>
+
+    <form class="order-form" action="{{ url_for('submit_order') }}" method="POST">
+        <label>Full Name
+            <input type="text" name="full_name" placeholder="Enter customer name" required>
+        </label>
+
+        <label>Phone Number
+            <input type="tel" name="phone" placeholder="Enter mobile number" required>
+        </label>
+
+        <label>Email Address
+            <input type="email" name="email" placeholder="Enter email address" required>
+        </label>
+
+        <label>Delivery Address
+            <textarea name="address" rows="4" placeholder="House no, street, area" required></textarea>
+        </label>
+
+        <div class="form-row">
+            <label>City
+                <input type="text" name="city" placeholder="Bangalore" required>
+            </label>
+            <label>Pincode
+                <input type="text" name="pincode" placeholder="560001" required>
+            </label>
+        </div>
+
+        <div class="form-row">
+            <label>Product
+                <select name="product_id" required>
+                    {% for product in products %}
+                    <option value="{{ product.id }}" {% if selected_product and selected_product.id == product.id %}selected{% endif %}>
+                        {{ product.name }} - ₹{{ product.price }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </label>
+            <label>Size
+                <select name="size">
+                    <option>S</option>
+                    <option selected>M</option>
+                    <option>L</option>
+                    <option>XL</option>
+                    <option>XXL</option>
+                </select>
+            </label>
+        </div>
+
+        <label>Quantity
+            <input type="number" name="quantity" value="1" min="1" max="10" required>
+        </label>
+
+        <button class="btn primary full-btn" type="submit">Submit Order</button>
+    </form>
+</section>
+{% endblock %}

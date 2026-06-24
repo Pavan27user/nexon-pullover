@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% set title = "Checkout | Noxen" %}
+{% block content %}
+<section class="checkout-page">
+    <div class="checkout-copy">
+        <p class="eyebrow">Login and delivery</p>
+        <h1>Complete your order</h1>
+        <p>Customer provides delivery details and selects payment option. This is a demo payment flow; real Razorpay/Stripe can be added later.</p>
+        <div class="checkout-summary">
+            {% for item in cart %}
+            <p><span>{{ item.name }} × {{ item.quantity }} / {{ item.size }}</span><strong>₹{{ item.price * item.quantity }}</strong></p>
+            {% endfor %}
+            <p class="total-line"><span>Total</span><strong>₹{{ total }}</strong></p>
+        </div>
+    </div>
+
+    <form class="order-form" action="{{ url_for('submit_order') }}" method="POST">
+        <label>Full Name
+            <input type="text" name="full_name" placeholder="Enter full name" required>
+        </label>
+        <label>Phone Number
+            <input type="tel" name="phone" placeholder="Enter mobile number" required>
+        </label>
+        <label>Email Address
+            <input type="email" name="email" placeholder="Enter email address" required>
+        </label>
+        <label>Delivery Address
+            <textarea name="address" rows="4" placeholder="House no, street, area" required></textarea>
+        </label>
+        <div class="form-row">
+            <label>City
+                <input type="text" name="city" placeholder="Bangalore" required>
+            </label>
+            <label>Pincode
+                <input type="text" name="pincode" placeholder="560001" required>
+            </label>
+        </div>
+        <label>Payment Option
+            <select name="payment_method" required>
+                <option>Cash on Delivery</option>
+                <option>UPI Payment</option>
+                <option>Credit / Debit Card</option>
+                <option>Net Banking</option>
+            </select>
+        </label>
+        <div class="payment-box">
+            <strong>Demo payment screen</strong>
+            <p>No real money is collected now. We can connect Razorpay later for live payments.</p>
+        </div>
+        <button class="btn primary full-btn" type="submit">Place Order</button>
+    </form>
+</section>
+{% endblock %}

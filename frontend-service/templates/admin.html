@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% set title = "Admin Orders | Noxen" %}
+{% block content %}
+<section class="page-hero small">
+    <p class="eyebrow">Admin dashboard</p>
+    <h1>Customer orders</h1>
+    <p>Basic admin page to verify orders during testing. Add password protection before production.</p>
+</section>
+
+<section class="section">
+    <div class="orders-table-wrap">
+        <table class="orders-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Customer</th>
+                    <th>Phone</th>
+                    <th>Product</th>
+                    <th>Size</th>
+                    <th>Qty</th>
+                    <th>City</th>
+                    <th>Pincode</th>
+                    <th>Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.full_name }}</td>
+                    <td>{{ order.phone }}</td>
+                    <td>{{ order.product_name }}</td>
+                    <td>{{ order.size }}</td>
+                    <td>{{ order.quantity }}</td>
+                    <td>{{ order.city }}</td>
+                    <td>{{ order.pincode }}</td>
+                    <td>{{ order.created_at }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="9">No orders yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}
